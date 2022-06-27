@@ -21,7 +21,7 @@ def accessibleaccountsandroles(session):
     li = ssoclient.list_accounts(accessToken=accesstoken);
     accounts = li['accountList']
     for account in accounts:
-        rli = ssoclient.list_account_roles(accessToken=accesstoken, accountId=account['accountId'])        
+        rli = ssoclient.list_account_roles(accessToken=accesstoken, accountId=account['accountId'])
         roles = rli['roleList']
         account['roles'] = roles
     return accounts
