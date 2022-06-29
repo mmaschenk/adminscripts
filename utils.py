@@ -3,6 +3,7 @@ from botocore.credentials import SSOTokenLoader
 
 import sys
 import os
+import copy
 
 profile = os.getenv("AWS_PROFILE", "masterpayer-readonly")
 region = os.getenv("AWS_REGION", "eu-west-1")
@@ -64,7 +65,7 @@ def analyzeaccount(session, account, usercache, groupcache, permissioncache, pol
 
     account['permissions'] = {}
     for permission in ps['PermissionSets']:
-        psinfo = permissioncache.get(permission)
+        psinfo = copy.copy(permissioncache.get(permission))
         account['permissions'][psinfo['Name']] = psinfo
         policies = policycache.get(permission)
         psinfo['policies'] = policies
@@ -86,7 +87,7 @@ def analyzeaccount(session, account, usercache, groupcache, permissioncache, pol
                 psinfo['unknownassignment'].append(assignment)
     return account
 
-def analyzeaccounts(session, silent=False):
+def analyzeaccounts(session, silent=False, maxentries=-1):
     idstore = session.client('identitystore')
     all_accounts = sorted(allaccounts(session), key=lambda x: x['Name'].lower())
     ssoadmin = session.client('sso-admin')
@@ -110,6 +111,8 @@ def analyzeaccounts(session, silent=False):
         acdata = analyzeaccount(session, account, usercache=usercache, groupcache=groupcache, permissioncache=permissioncache, policycache=policycache)
         accountdata.append(acdata)
         i += 1
+        if i == maxentries:
+            break
 
     print(f"\r\033[K", flush=True, file=sys.stderr)
     return accountdata
