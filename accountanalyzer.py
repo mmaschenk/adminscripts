@@ -3,7 +3,7 @@ import boto3
 import utils
 
 def main():
-    session = boto3.Session(profile_name='masterpayer', region_name='eu-west-1')
+    session = boto3.Session(profile_name=utils.profile, region_name=utils.region)
 
     data = utils.analyzeaccounts(session)
 

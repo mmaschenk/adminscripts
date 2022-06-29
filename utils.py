@@ -2,6 +2,10 @@ from botocore.credentials import create_credential_resolver
 from botocore.credentials import SSOTokenLoader
 
 import sys
+import os
+
+profile = os.getenv("AWS_PROFILE", "masterpayer-readonly")
+region = os.getenv("AWS_REGION", "eu-west-1")
 
 class SimpleCache(object):
     def __init__(self, retriever) -> None:
