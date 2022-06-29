@@ -39,6 +39,6 @@ The script only works when your current session (`AWS_PROFILE`) is actually an s
 
 The script lists for all accounts in your organizations what permission sets are in place and
 which user and/or groups have access. Please not that groups are not expanded to users in 
-these groups as there is no AWS-published api available for listing members of groups :-(
+these groups as there is no AWS-published api available for listing members of groups :angry:
 
 ---
