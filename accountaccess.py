@@ -11,7 +11,7 @@ import utils
 def main():
     session = boto3.Session(profile_name='masterpayer-readonly', region_name='eu-west-1')
     xs_accounts = utils.accessibleaccountsandroles(session)
-    all_accounts = utils.allaccounts(session)
+    all_accounts = sorted(utils.allaccounts(session), key=lambda x: x['Name'].lower())
 
     xs = { account['accountId'] : account for account in xs_accounts }
 
