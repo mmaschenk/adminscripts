@@ -2,16 +2,24 @@
 
 It is recommended to do this install in a virtual environment:
 
+Use either virtualenv:
 ```
 % mkdir .venv
 % virtualenv .venv
 % . .venv/bin/activate
 ```
 
+or venv:
+```
+% mkdir .venv
+% python -m venv .venv
+% . .venv/bin/activate
+```
+
 Install dependencies:
 
 ```
-% pip -r requirements.txt
+% pip install -r requirements.txt
 ```
 
 ## Usage
